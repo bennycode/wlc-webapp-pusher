@@ -73,8 +73,20 @@ TRUNCATE TABLE `playlist`;
 SET foreign_key_checks = 1;
 
 INSERT INTO  `playlist` 
-	(`ID`, `CODE`, `CREATED`, `LASTMODIFIED`, `NAME`, `AUTHOR_ID`, `CATEGORY_ID`, `LANGUAGECODE`)
+	(`ID`, `CODE`, `CREATED`, `LASTMODIFIED`, `NAME`, `AUTHOR_ID`, `CATEGORY_ID`, `LANGUAGECODE`, `PROVIDERNAME`, `DESCRIPTION`)
 VALUES 
-	(1, '406285BEFEA47E54z', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'Windows Phone Workshop (MMT30)', 7, 1, 'German'),
-	(2, '5EA5B1829771349A',	CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'Windows Phone 7 Dev Speedruns', 5, 1, 'German')
+	(1, '406285BEFEA47E54z', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'Windows Phone Workshop (MMT30)', 7, 1, 'German', 'YouTube', 'Mitschnitt der MMT30-Konferenz zum Thema \"Apps entwickeln für Windows Phone\".'),
+	(2, '5EA5B1829771349A',	CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'Windows Phone 7 Dev Speedruns', 5, 1, 'German', 'YouTube', 'In einer Reihe von superkurzen Speedrun-Videos werden grundlegende Funktionen von Windows Phone 7 gezeigt. Beginnend mit den ersten Schritten der Phone Entwicklung über SMS-Versand, Sounds, Telefonanrufe oder GPS-Daten.')
+	;
+	
+-- Videos
+
+SET foreign_key_checks = 0;
+TRUNCATE TABLE `video`;
+SET foreign_key_checks = 1;
+
+INSERT INTO `video`
+	(`ID`, `CODE`, `CREATED`, `DESCRIPTION`, `LASTMODIFIED`, `NAME`, `PLAYLIST_ID`)
+VALUES 
+	(1, 'LaLqAmP_FSI','2013-08-31 12:17:14',NULL, '2013-08-31 12:17:14','Architektur, Frameworks & APIs',1)
 	;
