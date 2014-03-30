@@ -1,14 +1,15 @@
 package com.welovecoding.web.pusher;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.IOException;
+import java.io.Reader;
+import java.nio.charset.Charset;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.jdbc.ScriptRunner;
 
 public class InsertSQL {
@@ -18,6 +19,7 @@ public class InsertSQL {
   public static void main(String[] args) throws ClassNotFoundException {
 
     Class.forName("com.mysql.jdbc.Driver");
+    Resources.setCharset(Charset.forName("UTF-8"));
 
     String url = "jdbc:mysql://localhost:3306/welovecoding";
     String user = System.getProperty("sql.user", "welovecoding");
@@ -28,19 +30,14 @@ public class InsertSQL {
     info.put("user", user);
     info.put("password", password);
 
-    InputStream in = Thread.currentThread().getContextClassLoader().getResourceAsStream(script);
-
-    if (in == null) {
-      LOG.log(Level.WARNING, "Test file not found.");
-    } else {
-      try {
-        Connection connection = DriverManager.getConnection(url, info);
-        ScriptRunner runner = new ScriptRunner(connection);
-        runner.runScript(new BufferedReader(new InputStreamReader(in)));
-        System.out.println("Script executed.");
-      } catch (SQLException ex) {
-        Logger.getLogger(InsertSQL.class.getName()).log(Level.SEVERE, null, ex);
-      }
+    try {
+      Connection connection = DriverManager.getConnection(url, info);
+      Reader reader = Resources.getResourceAsReader(Thread.currentThread().getContextClassLoader(), script);
+      ScriptRunner runner = new ScriptRunner(connection);
+      runner.runScript(reader);
+      LOG.log(Level.INFO, "Script executed.");
+    } catch (SQLException | IOException ex) {
+      Logger.getLogger(InsertSQL.class.getName()).log(Level.SEVERE, null, ex);
     }
   }
 }

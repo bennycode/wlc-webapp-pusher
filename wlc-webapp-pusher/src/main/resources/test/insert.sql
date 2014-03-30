@@ -1,3 +1,5 @@
+USE `welovecoding`;
+
 -- Authors
 SET foreign_key_checks = 0;
 TRUNCATE TABLE `author`;
