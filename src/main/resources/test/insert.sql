@@ -2,10 +2,10 @@ USE `welovecoding`;
 
 -- Authors
 SET foreign_key_checks = 0;
-TRUNCATE TABLE `author`;
+TRUNCATE TABLE `AUTHOR`;
 SET foreign_key_checks = 1;
 
-INSERT INTO `author` 
+INSERT INTO `AUTHOR` 
 (`ID`, `CHANNELURL`, `CREATED`, `DESCRIPTION`, `LASTMODIFIED`, `NAME`, `WEBSITE`) 
 VALUES 
 (1, 'https://www.youtube.com/user/apfelbenny', CURRENT_TIMESTAMP, '', CURRENT_TIMESTAMP, 'Benny Neugebauer', 'http://www.bennyn.de/'),
@@ -38,10 +38,10 @@ VALUES
 	
 -- Categories	
 SET foreign_key_checks = 0;
-TRUNCATE TABLE `category`;
+TRUNCATE TABLE `CATEGORY`;
 SET foreign_key_checks = 1;
 
-INSERT INTO `category` 
+INSERT INTO `CATEGORY` 
 (`ID`, `COLOR`, `CREATED`, `LASTMODIFIED`, `SLUG`, `NAME`) 
 VALUES 
 (1, '#19A2DE', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'windows-phone', 'Windows Phone'),
@@ -69,10 +69,10 @@ VALUES
 -- Playlists
 
 SET foreign_key_checks = 0;
-TRUNCATE TABLE `playlist`;
+TRUNCATE TABLE `PLAYLIST`;
 SET foreign_key_checks = 1;
 
-INSERT INTO `playlist` 
+INSERT INTO `PLAYLIST` 
 (`ID`, `CODE`, `CREATED`, `DESCRIPTION`, `ENABLED`, `LASTMODIFIED`, `NAME`, `SLUG`, `LANGUAGECODE`, `PROVIDERNAME`, `AUTHOR_ID`, `CATEGORY_ID`) 
 VALUES
 (1, '406285BEFEA47E54z', '2014-04-02 14:18:51', 'Mitschnitt der MMT30-Konferenz zum Thema "Apps entwickeln für Windows Phone".', 1, '2014-04-02 14:18:51', 'Windows Phone Workshop (MMT30)', 'windows-phone-workshop-mmt30', 'de', 'YouTube', 7, 1),
@@ -130,10 +130,10 @@ VALUES
 -- Videos
 
 SET foreign_key_checks = 0;
-TRUNCATE TABLE `video`;
+TRUNCATE TABLE `VIDEO`;
 SET foreign_key_checks = 1;
 
-INSERT INTO `video`
+INSERT INTO `VIDEO`
 (`ID`, `CODE`, `CREATED`, `DESCRIPTION`, `LASTMODIFIED`, `NAME`, `PLAYLIST_ID`)
 VALUES 
 (1, 'LaLqAmP_FSI','2013-08-31 12:17:14',NULL, '2013-08-31 12:17:14','Architektur, Frameworks & APIs',1)
