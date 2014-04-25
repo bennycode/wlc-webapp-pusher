@@ -24,7 +24,9 @@ public class InsertSQL {
     String url = "jdbc:mysql://localhost:3306/welovecoding";
     String user = System.getProperty("sql.user", "welovecoding");
     String password = System.getProperty("sql.password", "123456");
-    String script = System.getProperty("sql.script", "test/insert.sql");
+    // Get "insert.sql" from:
+    // "Google Drive\We Love Coding (secrets)\wlc-webapp-pusher\insert.sql"
+    String script = System.getProperty("sql.script", "production/insert.sql");
 
     Properties info = new Properties();
     info.put("user", user);
