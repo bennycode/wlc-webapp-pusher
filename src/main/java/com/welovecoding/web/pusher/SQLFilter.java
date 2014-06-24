@@ -153,11 +153,11 @@ public class SQLFilter {
 
 		List<Category> categoryList = parseSqlToObjects(Category.class, categories.toString());
 		SQLCreator<Category> categoryCreator = new SQLCreator(Category.class);
-		String categorySQL = categoryCreator.parseObjectToSQL(categoryList, "ID", "COLOR", "CREATED", "LASTMODIFIED", "SLUG", "NAME", "SLUG", "CREATOR_ID", "LASTEDITOR_ID");
+		String categorySQL = categoryCreator.parseObjectToSQL(categoryList, "ID", "COLOR", "CREATED", "LASTMODIFIED", "NAME", "SLUG", "CREATOR_ID", "LASTEDITOR_ID");
 
 		List<Playlist> playlistList = parseSqlToObjects(Playlist.class, playlists.toString());
 		SQLCreator<Playlist> playlistCreator = new SQLCreator(Playlist.class);
-		String playlistSQL = playlistCreator.parseObjectToSQL(playlistList, "ID", "CODE", "CREATED", "DESCRIPTION", "ENABLED", "LASTMODIFIED", "NAME", "SLUG", "SLUG", "LANGUAGECODE", "PROVIDER", "AUTHOR_ID", "CATEGORY_ID", "CREATOR_ID", "LASTEDITOR_ID");
+		String playlistSQL = playlistCreator.parseObjectToSQL(playlistList, "ID", "CODE", "CREATED", "DESCRIPTION", "ENABLED", "LASTMODIFIED", "NAME", "SLUG", "LANGUAGECODE", "PROVIDER", "AUTHOR_ID", "CATEGORY_ID", "CREATOR_ID", "LASTEDITOR_ID");
 
 		List<Video> videoList = parseSqlToObjects(Video.class, videos.toString());
 		SQLCreator<Video> videoCreator = new SQLCreator(Video.class);
