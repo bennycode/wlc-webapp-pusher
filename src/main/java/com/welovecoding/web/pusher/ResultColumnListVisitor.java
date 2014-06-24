@@ -7,16 +7,15 @@ package com.welovecoding.web.pusher;
 
 import com.foundationdb.sql.StandardException;
 import com.foundationdb.sql.parser.*;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  *
- * @author MacYser
+ * @author Michael Koppen
  */
 public class ResultColumnListVisitor implements Visitor {
 
-	private List<ResultColumnList> resultColumnList = new LinkedList<>();
+	private Set<ResultColumnListWrapper> resultColumnList = new LinkedHashSet<>();
 	private List<String> attributes = new LinkedList<>();
 
 	@Override
@@ -24,7 +23,9 @@ public class ResultColumnListVisitor implements Visitor {
 		QueryTreeNode node = (QueryTreeNode) vstbl;
 
 		if (node instanceof ResultColumnList) {
-			resultColumnList.add(((ResultColumnList) node));
+			ResultColumnListWrapper wrapper = new ResultColumnListWrapper((ResultColumnList) node);
+
+			resultColumnList.add(wrapper);
 		}
 		if (node instanceof ColumnReference) {
 			attributes.add(((ColumnReference) node).getColumnName());
@@ -33,11 +34,11 @@ public class ResultColumnListVisitor implements Visitor {
 		return vstbl;
 	}
 
-	public List<ResultColumnList> getResultColumnList() {
+	public Set<ResultColumnListWrapper> getResultColumnList() {
 		return resultColumnList;
 	}
 
-	public void setResultColumnList(List<ResultColumnList> resultColumnList) {
+	public void setResultColumnList(Set<ResultColumnListWrapper> resultColumnList) {
 		this.resultColumnList = resultColumnList;
 	}
 

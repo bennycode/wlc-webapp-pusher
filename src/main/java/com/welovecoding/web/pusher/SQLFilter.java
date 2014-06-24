@@ -143,7 +143,6 @@ public class SQLFilter {
 		videos.deleteCharAt(videos.length() - 2);
 		videos.append(';');
 
-//		System.out.println("VIDEOS: " + videos.toString());
 		List<User> userList = parseSqlToObjects(User.class, users.toString());
 		SQLCreator<User> userCreator = new SQLCreator(User.class);
 		String userSQL = userCreator.parseObjectToSQL(userList, "ID", "ADMIN", "CREATED", "EMAIL", "LASTMODIFIED", "NAME", "SLUG", "CREATOR_ID", "LASTEDITOR_ID");
@@ -177,7 +176,6 @@ public class SQLFilter {
 		System.out.println("TRUNCATE TABLE `VIDEO`;");
 		System.out.println(videoSQL);
 		System.out.println("SET foreign_key_checks = 1;");
-
 	}
 
 	private static <T> List<T> parseSqlToObjects(Class<T> entityClass, String sql) throws StandardException, InstantiationException, IllegalAccessException {
@@ -191,10 +189,12 @@ public class SQLFilter {
 			if (statementNode.getNodeType() == NodeTypes.INSERT_NODE) {
 				ResultColumnListVisitor resultColumnListVisitor = new ResultColumnListVisitor();
 				statementNode.accept(resultColumnListVisitor);
-				for (ResultColumnList columnList : resultColumnListVisitor.getResultColumnList()) {
+				for (ResultColumnListWrapper wrapper : resultColumnListVisitor.getResultColumnList()) {
+					ResultColumnList rcl = wrapper.getResultColumnList();
+
 					ObjectVisitor<T> objectVisitor = new ObjectVisitor(entityClass, resultColumnListVisitor.getAttributes());
-//					columnList.accept(new QueryVisitor());
-					columnList.accept(objectVisitor);
+//					rcl.accept(new QueryVisitor());
+					rcl.accept(objectVisitor);
 
 					T object = objectVisitor.getObject();
 					if (object != null) {

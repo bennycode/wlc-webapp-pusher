@@ -202,7 +202,6 @@ public class ObjectVisitor<T> implements Visitor {
 				case "boolean":
 					switch (from.getCanonicalName()) {
 						case "java.lang.Boolean":
-							System.out.println("### " + val.toString());
 							castedObject = Boolean.parseBoolean(val.toString());
 							break;
 						case "java.lang.Integer":
