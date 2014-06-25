@@ -64,7 +64,7 @@ public class SQLCreator<T> {
 				}
 
 				if (returnVal instanceof String) {
-					sql.append("'").append(returnVal).append("'");
+					sql.append("'").append(((String) returnVal).replaceAll("'", "''")).append("'");
 				} else if (returnVal instanceof Date) {
 					sql.append("'").append(sdf.format(returnVal)).append("'");
 				} else if (returnVal instanceof Enum) {

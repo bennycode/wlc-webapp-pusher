@@ -50,8 +50,8 @@ public class SQLFilter {
 		for (int i = 0; i < lines.size(); i++) {
 			if (lines.get(i).contains("INSERT INTO `USER`")) {
 				for (int j = i; j < lines.size(); j++) {
-					if (lines.get(j).contains("INSERT INTO")) {
-						if (lines.get(j).contains("INSERT INTO `USER`")) {
+					if (lines.get(j).startsWith("INSERT INTO")) {
+						if (lines.get(j).startsWith("INSERT INTO `USER`")) {
 							users.append(lines.get(j)).append('\n');
 							continue;
 						} else {
@@ -64,8 +64,8 @@ public class SQLFilter {
 			}
 			if (lines.get(i).contains("INSERT INTO `AUTHOR`")) {
 				for (int j = i; j < lines.size(); j++) {
-					if (lines.get(j).contains("INSERT INTO")) {
-						if (lines.get(j).contains("INSERT INTO `AUTHOR`")) {
+					if (lines.get(j).startsWith("INSERT INTO")) {
+						if (lines.get(j).startsWith("INSERT INTO `AUTHOR`")) {
 							authors.append(lines.get(j)).append('\n');
 							continue;
 						} else {
@@ -78,8 +78,8 @@ public class SQLFilter {
 			}
 			if (lines.get(i).contains("INSERT INTO `CATEGORY`")) {
 				for (int j = i; j < lines.size(); j++) {
-					if (lines.get(j).contains("INSERT INTO")) {
-						if (lines.get(j).contains("INSERT INTO `CATEGORY`")) {
+					if (lines.get(j).startsWith("INSERT INTO")) {
+						if (lines.get(j).startsWith("INSERT INTO `CATEGORY`")) {
 							categories.append(lines.get(j)).append('\n');
 							continue;
 						} else {
@@ -92,8 +92,8 @@ public class SQLFilter {
 			}
 			if (lines.get(i).contains("INSERT INTO `PLAYLIST`")) {
 				for (int j = i; j < lines.size(); j++) {
-					if (lines.get(j).contains("INSERT INTO")) {
-						if (lines.get(j).contains("INSERT INTO `PLAYLIST`")) {
+					if (lines.get(j).startsWith("INSERT INTO")) {
+						if (lines.get(j).startsWith("INSERT INTO `PLAYLIST`")) {
 							playlists.append(lines.get(j)).append('\n');
 							continue;
 						} else {
@@ -112,8 +112,8 @@ public class SQLFilter {
 				}
 
 				for (int j = i + 1; j < lines.size(); j++) {
-					if (lines.get(j).contains("INSERT INTO")) {
-						if (lines.get(j).contains("INSERT INTO `VIDEO`")) {
+					if (lines.get(j).startsWith("INSERT INTO")) {
+						if (lines.get(j).startsWith("INSERT INTO `VIDEO`")) {
 //							System.out.println("collecting: " + lines.get(j));
 //							videos.append(lines.get(j)).append('\n');
 							continue;
@@ -165,6 +165,7 @@ public class SQLFilter {
 
 		System.out.println("USE `welovecoding`;");
 		System.out.println("SET foreign_key_checks = 0;");
+		System.out.println("TRUNCATE TABLE `USERCREDENTIALS`;");
 		System.out.println("TRUNCATE TABLE `USER`;");
 		System.out.println(userSQL);
 		System.out.println("TRUNCATE TABLE `AUTHOR`;");
